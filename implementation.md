@@ -4,18 +4,28 @@ title: Implementation details
 
 ### Implementation details
 
-Implementations (proof-of-concept):
-- [Chromium]( https://github.com/Kaleidea/chromium/commits/search-element ) (commits on GitHub)
-- [WebKit]( https://github.com/Kaleidea/WebKit/commits/search-element ) (commits on GitHub)
+Implementations:
+- [Chromium]( https://github.com/Kaleidea/chromium/commits/search-element ) (prototype, commits on GitHub)
+- [WebKit]( https://github.com/Kaleidea/WebKit/commits/search-element ) (proof-of-concept, commits on GitHub)
 - Firefox in progress (commits in Mercurial)
+
+<br>
+
+
+#### Implementation complexity
+
+In Chromium:
+- Checks for `kSearchTag` when aliasing `div`: 5 = 2 (parser) + 1 (aria role) + 2 (`<p>` closing)
+- Checks for `kSearchTag` when aliasing `form`: 10 = 3 (parser) + 1 (aria role) + 2 (`<p>` closing) + 1 (form) + 3 (collections)
 
 <br>
 
 
 #### DOM building
 - Constraint: The HTMLFormElement class in the 3 major browsers is `final` for performance.
-- `HTMLTreeBuilder` (Blink, WebKit): `searchTag` instantiates an HTMLFormElement, like `mainTag` instantiates an HTMLElement.
-- `HTMLTagNames.in` (Blink, WebKit): `search interfaceName=HTMLFormElement` generates `searchConstructor()` -> `HTMLElementFactory::createHTMLElement()` (Blink) / `HTMLElementFactory::createKnownElement()` (WebKit)
+- `HTMLTreeBuilder` (Blink, WebKit): `kSearchTag` instantiates an HTMLFormElement.
+- `html_tag_names.json5` (Blink): `name: "search", interfaceName: "HTMLFormElement"` generates `HTMLSearchConstructor()` -> `HTMLElementFactory::Create()`
+- `HTMLTagNames.in` (WebKit): `search interfaceName=HTMLFormElement` generates `searchConstructor()` -> `HTMLElementFactory::createKnownElement()` (WebKit)
 
 
 #### ARIA
@@ -48,8 +58,7 @@ Sidenote: if `<form>` wouldn't be standardized yet, I'd suggest the same functio
 
 
 #### User-agent stylesheet
-- `display: block` (like `<div>`, `<form>`)
-- `unicode-bidi: isolate` (like `<div>`, `<form>`)
+- `form, search { display: block; margin-top: 0; }` in the user agent stylesheet (Blink: `third_party/blink/renderer/core/html/resources/html.css`).
 
 
 #### Shadow DOM

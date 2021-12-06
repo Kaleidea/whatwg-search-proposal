@@ -4,17 +4,28 @@ title: Alternatives
 
 ### Alternatives
 
-Should the implementation of a [hybrid element as defined](  ) fall through, an alternative is to define 2 elements (`<search>` and `<searchform>`) for the 2 use-cases:
 
-- `<search>` === `<div role=search>`
-- `<searchform action="...">` === `<form role=search action="...">`
+#### To disable form submission
 
-Implementing this is trivial by aliasing `HTMLElement` -> `<search>` and `HTMLFormElement` -> `<searchform>`. The specification still needs rewording to incorporate `<searchform>` as a `<form>`. The only benefit would be that the `action` attribute's specification is not changed.
+- `method=none` / `nosubmit` boolean attribute. To support the migration of the `div` usage without adding extra attributes the absence of  `action` must disable form submission, therefore the alternatives would be redundant.
 
-Should 2 elements find opposition, the proposal would be to favor the best practice:
 
-- `<search action="...">` === `<form role=search action="...">`
-- `<search>` can be used with form submission dissabled by the `submit` event handler.
-- `<div role=search>` remains the suggested usage if form functionality is to be avoided.
+#### No hybrid element
 
-Implementing this is trivial by aliasing `HTMLFormElement` -> `<search>`. he specification still needs rewording to incorporate `<search>` as a `<form>`. The drawback is that a few use-cases of the original request is not treated as first-class. The reasoning above implies that the best practice is more important to be treated as first-class, thus if a choice has to be made it should be to favor `form` semantics. The hybrid element proposal makes a strong effort to avoid such trade-off.
+Define 2 elements (`<search>` and `<searchform>`) for the 2 use-cases:
+
+- `<div role=search>` --> `<search>`
+- `<form role=search action="...">` --> `<searchform action="...">`
+
+Implementing this has the same cost as the hybrid solution, in which `HTMLFormElement` branches in one location in `ScheduleFormSubmission()` to differentiate between `<search>` and `<form>`. That condition would be replaced by another condition in `HTMLTreeBuilder` to match `<searchform>`.
+
+The only benefit would be that `<search>` with an unset `action` attribute behaves consistently with `<form>`.
+
+
+#### Disable form submission with JavaScript
+
+- `<form role=search>` --> `<search>`
+- `<div role=search>` --> `<search submit="return false;">`
+
+Implementing this has almost the same cost as the hybrid solution: it saves one condition in `ScheduleFormSubmission()`.
+The drawback is that use-cases for client-side rendering require the boilerplate of a submit event handler.

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Test: HTML search element</title>
+</head>
+
+<body>
+
+<style>
+
+form, search {
+  display: block;
+  padding: 0.5em;
+}
+
+input {
+}
+
+input[type=search] {
+  width: 25em;
+  background: linear-gradient(90deg, #00ff8980, #9e9e9e80);
+  color: #fff;
+  padding: 0.3em;
+  border: 0;
+  border-radius: 3px;
+}
+
+input[type=submit] {
+  background: linear-gradient(90deg, #00ff8880, #22ddff80);
+  color: #fff;
+  padding: 0.3em;
+  border: 0;
+  border-radius: 3px;
+  box-shadow: 1px 1px 6px 0px #333;
+  transition: all 100ms;
+}
+
+input[type=submit]:active {
+  box-shadow: none;
+  transform: translate(1px, 1px);
+}
+
+h1 {
+  margin-top: 0;
+}
+
+h1, h2 {
+  text-align: center;
+  color: #eee;
+}
+
+h4 {
+  margin-bottom: 0.2em;
+  color: #ccc;
+}
+
+:link {
+  color: greenyellow;
+}
+
+:visited {
+  color: lawngreen;
+}
+
+html, dialog, .note {
+  background: linear-gradient(130deg, rgba(150,50,180,1) 0%, rgba(30,75,250,1) 55%, rgba(250,70,100,1) 100%);
+  color: white;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 3em auto;
+}
+
+header {
+  width: 100%;
+}
+
+body > div {
+  margin: 0 auto;
+}
+
+section, .note {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.note {
+  text-align: center;
+}
+
+dialog, .note {
+  position: static;
+  padding: 1em;
+  margin: 0 auto;
+  border: 0;
+  box-shadow: 1px 1px 6px 0px #333;
+}
+
+dialog {
+  margin-top: 1em;
+}
+
+dialog h4:first-child {
+  margin-top: 0;
+}
+
+</style>
+
+
+
+
+<header>
+  <h1>Verify the <code>search</code> element</h2>
+  <p class="note">
+    See: <a href="/whatwg-search-proposal/">Explanation</a>
+    and <a href="https://search-element-html-spec.netlify.app/multipage/forms.html#the-search-element">specification draft</a>.
+    <br>
+    Requires custom build of chromium with enabled <br> <a href="chrome://flags/#enable-experimental-web-platform-features">Experimental Web Platform features flag</a>.
+  </p>
+</header>
+
+<div>
+  <h2><code>search</code> element</h2>
+  <section>
+    <h4>Submit opens a new page:</h4>
+    <search id="searchSubmitThisPage" name="searchSubmitThisPage" target="_blank" action="">
+      <input type="search" name="q" value="&lt;search&gt; with empty action submits to this page"/>
+      <input type="submit" name="submit"/>
+    </search>
+    <search id="searchSubmitDDG" name="searchSubmitDDG" target="_blank" action="https://duckduckgo.com">
+      <input type="search" name="q" value="&lt;search&gt; that submits to DuckDuckGo"/>
+      <input type="submit" name="submit"/>
+    </search>
+    <h4>Submit does nothing:</h4>
+    <search id="searchNoSubmit" name="searchNoSubmit">
+      <input type="search" name="q" value="&lt;search&gt; without action"/>
+      <input type="submit" name="submit"/>
+    </search>
+  </section>
+  <dialog open="open">
+    <h4>Submit just closes the dialog:</h4>
+    <search id="searchCloseDialog" name="searchCloseDialog" method="dialog">
+      <input type="search" name="q" value="&lt;search&gt; with method=dialog"/>
+      <input type="submit" name="submit"/>
+    </search>
+  </dialog>
+</div>
+
+<div>
+  <h2><code>form</code> element</h2>
+  <section>
+    <h4>Submit opens a new page:</h4>
+    <form id="plainForm" name="plainForm" target="_blank">
+      <input type="search" name="q" value="&lt;form&gt; without action submits to this page"/>
+      <input type="submit" name="submit"/>
+    </form>
+    <form id="plainForm" name="plainForm" target="_blank" action="https://duckduckgo.com">
+      <input type="search" name="q" value="&lt;form&gt; that submits to DuckDuckGo"/>
+      <input type="submit" name="submit"/>
+    </form>
+  </section>
+  <dialog open="open">
+    <h4>Submit just closes the dialog:</h4>
+    <form id="formCloseDialog" name="formCloseDialog" method="dialog">
+      <input type="search" name="q" value="&lt;form&gt; with method=dialog"/>
+      <input type="submit" name="submit"/>
+    </form>
+  </dialog>
+</div>
+
+
+
+</body>
+</html>
