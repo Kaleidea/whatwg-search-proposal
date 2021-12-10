@@ -50,6 +50,7 @@ This approach meets developers' expectations, guaranteeing the best API ergonomy
 1. `<form role=search action="...">` is shortened to `<search action="...">` (server-side rendering of search results)
 1. `<form role=search>` becomes `<search action>` (server-side rendering of search results, target URL is the document's)
 
+#### Form submission
 Form submission is when the browser sends the contents of a form to a server and navigates to the webpage in the response. This includes implicit form submission which happens when pressing ENTER (or equivalent) or the first submit button.
 
 In the first case (`div`) form submission is an unwanted feature, therefore disabled. The second case behaves equivalently to a `form` with `role=search`.
@@ -57,21 +58,23 @@ The `action` attribute's presence distinguishes between the two cases. A `form` 
 
 Alternatives considered: `method=none` / `nosubmit` boolean attribute. To support the migration of the `div` usage without adding extra attributes the absence of  `action` must disable form submission, therefore the alternatives would be redundant.
 
-Other form functionality is opt-in, if the developer makes no use of it then it does not change the application's behavior:
+#### Other form functionality
+Other form functionality is opt-in: if the developer makes no use of it then it does not change the application's behavior.
 - Form validation is optional.
 - Reset button is optional.
 - Autocomplete is on by default for `<input type=searchbox>` even without a form.
 - Registering `<search>` in `document.forms` has no effect on behavior.
 - Associating with descendant form controls has no effect on behavior unless the developer makes use of it, in which case it is a benefit.
 
+#### Nesting
 Nesting of `<search>` and `<form>` is invalid in any combination:
 - `<search><search>` is semantically meaningless.
 - `<div role=search>...<form>` and `<form>...<div role=search>` can often be [refactored]( https://kaleidea.github.io/whatwg-search-proposal/migration#nesting ) to a single `<search>`. Researching [usage patterns in the wild]( https://kaleidea.github.io/whatwg-search-proposal/migration#usage-patterns ) suggests this to be possible in most cases.
 
-Shadow DOM:
+#### Shadow DOM
 - `<search>` cannot be a shadow root: `.attachShadow()` is not allowed (like `<form>`, but unlike `<div>`). ([MDN]( https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow#elements_you_can_attach_a_shadow_to ))
 
-Layout:
+#### Layout
 - `form, search { display: block; margin-top: 0; }` in the user agent [stylesheet]( https://github.com/Kaleidea/chromium/commit/30e21a0bc72f9df0bda67bc956093a1da0390be9#diff-039ad02aad25eca0593554285fa92cddc5a4964e934144a500802f40a2968838R367 ) (standards mode, no change to quirks mode)
 
 
