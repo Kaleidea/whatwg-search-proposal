@@ -19,8 +19,7 @@ title: Migration guide
 #### Not `<div>` or `<form>`
 - [other elements used with `role=search` (ignore the custom components)](https://sourcegraph.com/search?q=context:global+%3C%28%5B%5Edf/%5C%3F%5D..%7Cd.%5B%5Ev%5D%7Cf.%5B%5Er%5D%29%5B%5E%3E%5D*role%3D%5B%27%22%5D%3Fsearch%5B%27%22+%3E%5D&patternType=regexp) are mostly anti-patterns that will benefit from refactoring to adopt the `<search>` element.
 
-
-### Usage patterns
+#### Usage patterns
 
 Note: Sourcegraph indexes open-source projects only. It does not cover the World Wide Web, but there are many public git scraping projects that mirror a piece of the Web.
 
@@ -33,4 +32,31 @@ Note: Sourcegraph indexes open-source projects only. It does not cover the World
 - [`<form role=search>, multiple <div>`]( https://sourcegraph.com/search?q=context:global+%3Cform%5B%5E%3E%5D%2Brole%3D%5B%27%22%5D%3Fsearch%5B%27%22+%3E%5D%5B%5E%3C%5D*%28%3C%28%5B%5E/%5D%7C/%5B%5Ef%5D%7C/..%5B%5Er%5D%29%5B%5E%3C%5D*%29*%3C/div%3E%5Cs*%3Cdiv%5B%5E%3C%5D*%28%3C%28%5B%5E/%5D%7C/%5B%5Ef%5D%7C/..%5B%5Er%5D%29%5B%5E%3C%5D*%29*%3C/form%3E&patternType=regexp ) - complex trees.
 - Exotic search landmarks - [`not <form>, not <div>`]( https://sourcegraph.com/search?q=context:global+%3C%28%5B%5Edf/%5C%3F%5D..%7Cd.%5B%5Ev%5D%7Cf.%5B%5Er%5D%29%5B%5E%3E%5D*role%3D%5B%27%22%5D%3Fsearch%5B%27%22+%3E%5D&patternType=regexp ):
 -> input, ul, li, components, aside, table, span, section??
+
+
+
+### How to update JS code and libraries
+
+Common use-cases:
+
+#### Tagname conditions
+
+- `element.tagName.toLowerCase() === 'form'`
+- `element.tagName.toUpperCase() === 'FORM'`
+- `element.tagName === 'FORM'`
+- Variations with double quotes, `element.nodeName`, `element.localName`
+
+-> `element instanceof HTMLFormElement`
+
+#### Ancestor selector
+
+- `element.closest('form')` -> `element.closest('form,search')`
+
+#### Switch-case
+
+- `case 'FORM'` ->
+```
+case 'FORM':
+case 'SEARCH':
+```
 
