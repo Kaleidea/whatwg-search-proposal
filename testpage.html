@@ -129,23 +129,23 @@ dialog h4:first-child {
   <h2><code>search</code> element</h2>
   <section>
     <h4>Submit opens a new page:</h4>
-    <search id="searchSubmitThisPage" name="searchSubmitThisPage" target="_blank" action="">
+    <search id="searchSubmitThisPage" name="searchSubmitThisPage" target="FRsearchSubmitThisPage" action="">
       <input type="search" name="q" value="&lt;search&gt; with empty action submits to this page"/>
       <input type="submit" name="submit"/>
     </search>
-    <search id="searchSubmitDDG" name="searchSubmitDDG" target="_blank" action="https://duckduckgo.com">
+    <search id="searchSubmitDDG" name="searchSubmitDDG" target="FRsearchSubmitDDG" action="https://duckduckgo.com">
       <input type="search" name="q" value="&lt;search&gt; that submits to DuckDuckGo"/>
       <input type="submit" name="submit"/>
     </search>
     <h4>Submit does nothing:</h4>
-    <search id="searchNoSubmit" name="searchNoSubmit">
+    <search id="searchNoSubmit" name="searchNoSubmit" target="FRsearchNoSubmit">
       <input type="search" name="q" value="&lt;search&gt; without action"/>
       <input type="submit" name="submit"/>
     </search>
   </section>
   <dialog open="open">
     <h4>Submit just closes the dialog:</h4>
-    <search id="searchCloseDialog" name="searchCloseDialog" method="dialog">
+    <search id="searchCloseDialog" name="searchCloseDialog" target="FRsearchCloseDialog" method="dialog">
       <input type="search" name="q" value="&lt;search&gt; with method=dialog"/>
       <input type="submit" name="submit"/>
     </search>
@@ -156,18 +156,18 @@ dialog h4:first-child {
   <h2><code>form</code> element</h2>
   <section>
     <h4>Submit opens a new page:</h4>
-    <form id="plainForm" name="plainForm" target="_blank">
+    <form id="plainFormThisPage" name="plainFormThisPage" target="FRplainFormThisPage">
       <input type="search" name="q" value="&lt;form&gt; without action submits to this page"/>
       <input type="submit" name="submit"/>
     </form>
-    <form id="plainForm" name="plainForm" target="_blank" action="https://duckduckgo.com">
+    <form id="plainFormDDG" name="plainFormDDG" target="FRplainFormDDG" action="https://duckduckgo.com">
       <input type="search" name="q" value="&lt;form&gt; that submits to DuckDuckGo"/>
       <input type="submit" name="submit"/>
     </form>
   </section>
   <dialog open="open">
     <h4>Submit just closes the dialog:</h4>
-    <form id="formCloseDialog" name="formCloseDialog" method="dialog">
+    <form id="formCloseDialog" name="formCloseDialog" target="FRformCloseDialog" method="dialog">
       <input type="search" name="q" value="&lt;form&gt; with method=dialog"/>
       <input type="submit" name="submit"/>
     </form>
