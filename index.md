@@ -4,18 +4,12 @@ title: HTML search element explainer
 
 ## HTML \<search\> element - specification draft and implementation
 
-The `<search>` element is a new semantic HTML element to mark the ARIA search landmark. It represents the common functionality of searching a website, contents on a webpage or filtering a dataset. `<search>` is a short form of `<form role=search>` or `<div role=search>` depending on whether form submission is enabled by setting the `action` attribute. The benefit of this element is making the [best practice]( https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Search_role ) for accessibility simpler, more intuitive and semantically meaningful.
+The `<search>` element is a new semantic HTML element to mark the ARIA search landmark. It represents the common functionality of searching a website, contents on a webpage or filtering a dataset.
 
-- [Test page](testpage)
-- [Implementation explanation](implementation)
-- Specification draft:
-    - [Readable form]( https://search-element-html-spec.netlify.app/multipage/forms.html#the-search-element ) (generated)
-    - [Specification changes](#specification-changes) (source)
-    - [Pull request]( https://github.com/whatwg/html/pull/7382 )
-- Implementations:
-    - [Chromium]( https://github.com/Kaleidea/chromium/commits/search-element ) (prototype, commits on GitHub)
-    - [WebKit]( https://github.com/Kaleidea/WebKit/commits/search-element ) (proof-of-concept, commits on GitHub)
-    - Firefox in progress (commits in Mercurial)
+- `<search>` is a short form of `<div role=search>`,
+- `<search action="...">` is a short form of `<form role=search action="...">`.
+
+The benefit of this element is making the [best practice]( https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Search_role ) for accessibility simpler, more intuitive and semantically meaningful.
 
 
 #### Contents
@@ -30,6 +24,17 @@ The `<search>` element is a new semantic HTML element to mark the ARIA search la
 1. [Migration guide, usage patterns](migration)
 1. [Implementation explanation](implementation)
 1. [Alternatives](alternatives)
+1. [Test page](testpage)
+
+#### Specification draft
+- [Readable form]( https://search-element-html-spec.netlify.app/multipage/forms.html#the-search-element ) (generated)
+- [Specification changes](#specification-changes) (source)
+- [Pull request]( https://github.com/whatwg/html/pull/7382 )
+
+#### Implementations
+- [Chromium]( https://github.com/Kaleidea/chromium/commits/search-element ) (prototype, commits on GitHub)
+- [WebKit]( https://github.com/Kaleidea/WebKit/commits/search-element ) (proof-of-concept, commits on GitHub)
+- Firefox in progress (commits in Mercurial)
 
 <br>
 

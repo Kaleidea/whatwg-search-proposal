@@ -2,6 +2,22 @@
 title: Migration guide
 ---
 
+## Migration guide
+
+#### Contents
+
+1. [How to migrate current applications of `role=search`](#how-to-migrate-current-applications-of-rolesearch)
+    1. [Simple cases](#simple-cases)
+    1. [Nesting](#nesting)
+    1. [Not `<div>` or `<form>`](#not-div-or-form)
+    1. [Usage patterns](#usage-patterns)
+1. [How to update JS code and libraries](#how-to-update-js-code-and-libraries)
+    1. [Tagname conditions](#tagname-conditions)
+    1. [Ancestor selector](#ancestor-selector)
+    1. [Switch-case](#switch-case)
+
+<br>
+
 ### How to migrate current applications of `role=search`
 
 #### Simple cases
