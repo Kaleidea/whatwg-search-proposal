@@ -32,7 +32,7 @@ The benefit of this element is making the [best practice]( https://developer.moz
 - [Pull request]( https://github.com/whatwg/html/pull/7382 )
 
 #### Implementations
-- [Chromium]( https://github.com/Kaleidea/chromium/commits/search-element ) (prototype, commits on GitHub)
+- [Chromium]( https://github.com/chromium/chromium/pull/100/commits ) (prototype, commits on GitHub)
 - [WebKit]( https://github.com/Kaleidea/WebKit/commits/search-element ) (proof-of-concept, commits on GitHub)
 - Firefox in progress (commits in Mercurial)
 
