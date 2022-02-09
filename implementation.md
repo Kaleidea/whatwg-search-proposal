@@ -4,6 +4,18 @@ title: Implementation details
 
 ### Implementation details
 
+1. [Implementation complexity](#implementation-complexity)
+1. [DOM building](#dom-building)
+1. [ARIA](#aria)
+1. [Disabling form submission](#disabling-form-submission)
+1. [Form behavior that's enabled even without a form element: *no change*](#form-behavior-thats-enabled-even-without-a-form-element-no-change)
+1. [Form behavior that's not disabled: *no change*](#form-behavior-thats-not-disabled-no-change)
+1. [Nesting: *no change*](#nesting-no-change)
+1. [User-agent stylesheet](#user-agent-stylesheet)
+1. [Shadow DOM](#shadow-dom)
+1. [Further considerations](#further-considerations)
+
+
 Implementations:
 - [Chromium]( https://github.com/chromium/chromium/pull/100/commits ) (prototype, commits on GitHub)
 - [WebKit]( https://github.com/Kaleidea/WebKit/commits/search-element ) (proof-of-concept, commits on GitHub)
@@ -41,11 +53,16 @@ Sidenote: if `<form>` wouldn't be standardized yet, I'd suggest the same functio
 <br>
 
 
-#### Form behavior that's not disabled: *no change*
-- `<input type=reset>` and form validation remains functional. It these features are used, this is what would be expected without `action`.
-- `autocomplete` is on by default:
+#### Form behavior that's enabled even without a form element: *no change*
+(Depending on the user agent.)
+- `autocomplete` is on by default, defined by the individual form controls:
 	- "If there is no form owner, then the value "on" is used." ([HTML spec](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fe-autocomplete))
 	- "The *missing value default* and the *invalid value default* are the `on` state." ([HTML spec](https://html.spec.whatwg.org/multipage/forms.html#attr-form-autocomplete))
+- Validation is defined by the individual form controls.
+
+
+#### Form behavior that's not disabled: *no change*
+- `<input type=reset>` remains functional. It this features is used, this is the developer expectation.
 - The search element is registered in `document.forms`. This is different from `<div role=search>`, but documented behavior for the `<search>` element, therefore developers would be aware. This is more intuitive, even.
 - Form associated elements (form controls) associate with the closest `<form>` or `<search>` ancestor. The presence or absence of `action` has no effect on association.
 <br>
